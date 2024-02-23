@@ -1,0 +1,4 @@
+backend/venv
+__pycache__/
+backend/migrations/__pycache__/
+backend/server/__pycache__/
