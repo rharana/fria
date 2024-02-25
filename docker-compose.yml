@@ -6,17 +6,23 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     volumes:
-      - ./backend:/backend
+      - ./backend:/usr/src/app
     ports:
-      - "8000:8000"
+      - "8080:8080"
     environment:
-      - DEBUG=1 # Set to 0 in production
+      - DEBUG=1
 
   frontend:
     build:
-      context: ./frontend/app
+      context: ./frontend
       dockerfile: Dockerfile
+
+    volumes:
+      - ./frontend:/usr/src/app:delegated
+      - /usr/src/app/node_modules/
+
     ports:
-      - "3000:80"
-    depends_on:
-      - backend
+      - "5173:5173"
+
+    environment:
+      - CHOKIDAR_USEPOLLING=true
